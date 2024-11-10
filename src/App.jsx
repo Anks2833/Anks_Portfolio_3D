@@ -1,11 +1,14 @@
 import { Canvas } from '@react-three/fiber';
-import { OrbitControls } from '@react-three/drei';
-import { useEffect, useState } from 'react';
+import { Physics } from '@react-three/cannon'; // Import Physics
+import { useEffect, useState, useRef } from 'react';
 import BackgroundColor from './components/BackgroundColor';
 import CharacterModel from './components/CharacterModel';
+import JungleModel from './components/JungleModel';
+import ThirdPersonCamera from './components/ThirdPersonCamera';
 
 const App = () => {
   const [bgColor, setBgColor] = useState('blue');
+  const characterRef = useRef();
 
   useEffect(() => {
     const hour = new Date().getHours();
@@ -19,13 +22,17 @@ const App = () => {
   }, []);
 
   return (
-    <div className='w-full h-screen'>
+    <div className="w-full h-screen">
       <Canvas style={{ background: bgColor }}>
-        <ambientLight />
-        <pointLight position={[10, 10, 10]} />
-        <CharacterModel />
-        <BackgroundColor color={bgColor} />
-        <OrbitControls />
+        <Physics>
+          <ambientLight />
+          <pointLight position={[10, 10, 10]} />
+          <CharacterModel ref={characterRef} />
+          <JungleModel />
+          <BackgroundColor color={bgColor} />
+          {/* GTA-style Camera */}
+          <ThirdPersonCamera target={characterRef} />
+        </Physics>
       </Canvas>
     </div>
   );
