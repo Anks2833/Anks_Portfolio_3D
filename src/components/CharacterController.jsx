@@ -5,10 +5,8 @@ import CharacterModel from './CharacterModel';
 const CharacterController = () => {
     const characterRef = useRef();
     const speed = 5;
-    const jumpForce = 10;
 
     const [moving, setMoving] = useState({ up: false, down: false, left: false, right: false });
-    const [canJump, setCanJump] = useState(true); // New state to manage jump
 
     const handleKeyDown = (event) => {
         const { key } = event;
@@ -30,12 +28,6 @@ const CharacterController = () => {
                 case 'ArrowRight':
                 case 'd':
                     newState.right = true;
-                    break;
-                case ' ':
-                    if (canJump) {
-                        characterRef.current?.applyImpulse({ x: 0, y: jumpForce, z: 0 });
-                        setCanJump(false); // Prevent further jumps until key is released
-                    }
                     break;
                 default:
                     break;
@@ -64,9 +56,6 @@ const CharacterController = () => {
                 case 'ArrowRight':
                 case 'd':
                     newState.right = false;
-                    break;
-                case ' ':
-                    setCanJump(true); // Allow jumping again when space is released
                     break;
                 default:
                     break;
