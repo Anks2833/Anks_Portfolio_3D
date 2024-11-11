@@ -5,7 +5,7 @@ import * as THREE from 'three';
 
 const CharacterModel = forwardRef((props, ref) => {
     const actionRef = useRef();
-    const { scene, animations } = useGLTF('../../Models/Man_Talking.glb');
+    const { scene, animations } = useGLTF('../../Models/Man_Idle.glb');
     const { actions } = useAnimations(animations, scene);
 
     // Log animation names
@@ -19,8 +19,8 @@ const CharacterModel = forwardRef((props, ref) => {
 
     // Play the animation
     useEffect(() => {
-        if (actions && actions['Armature|mixamo.com|Layer0.001']) {
-            actionRef.current = actions['Armature|mixamo.com|Layer0.001'];
+        if (actions && actions['Armature|mixamo.com|Layer0']) {
+            actionRef.current = actions['Armature|mixamo.com|Layer0'];
             actionRef.current.setLoop(THREE.LoopRepeat, Infinity);
             actionRef.current.play();
         }

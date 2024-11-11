@@ -6,8 +6,8 @@ const ThirdPersonCamera = ({ target }) => {
   const { camera, gl } = useThree();
   const [currentAngle, setCurrentAngle] = useState(Math.PI); // Initial horizontal angle in radians
   const [verticalAngle, setVerticalAngle] = useState(0); // Initial vertical angle
-  const [distance, setDistance] = useState(16); // Default distance behind the character
-  const [verticalOffset, setVerticalOffset] = useState(12); // Vertical offset for camera height
+  const [distance, setDistance] = useState(15); // Default distance behind the character
+  const [verticalOffset, setVerticalOffset] = useState(8); // Vertical offset for camera height
   const cameraRef = useRef(camera);
 
   // Handle mouse move for rotation
@@ -17,26 +17,35 @@ const ThirdPersonCamera = ({ target }) => {
     setVerticalAngle((prev) => Math.max(-Math.PI / 4, Math.min(Math.PI / 6, prev - e.movementY * rotationSpeed)));
   };
 
-    // Request pointer lock on canvas click
-    const handleCanvasClick = () => {
+  // Request pointer lock
+  const requestPointerLock = () => {
+    if (document.pointerLockElement !== gl.domElement) {
       gl.domElement.requestPointerLock();
-    };
-  
-    // Handle pointer lock change
-    const handlePointerLockChange = () => {
-      if (document.pointerLockElement === gl.domElement) {
-        gl.domElement.addEventListener('mousemove', handleMouseMove);
-      } else {
-        gl.domElement.removeEventListener('mousemove', handleMouseMove);
-      }
-    };
+    }
+  };
 
-  // Attach event listeners
+  // Handle pointer lock change
+  const handlePointerLockChange = () => {
+    if (document.pointerLockElement === gl.domElement) {
+      gl.domElement.addEventListener('mousemove', handleMouseMove);
+    } else {
+      gl.domElement.removeEventListener('mousemove', handleMouseMove);
+      requestPointerLock(); // Re-request pointer lock if it is lost
+    }
+  };
+
   useEffect(() => {
-    gl.domElement.addEventListener('mousemove', handleMouseMove);
+    // Only need the first click to start pointer lock
+    gl.domElement.addEventListener('click', requestPointerLock);
+
+    // Set up pointer lock change listeners
+    document.addEventListener('pointerlockchange', handlePointerLockChange);
+    document.addEventListener('pointerlockerror', requestPointerLock); // Retry if there’s a pointer lock error
 
     return () => {
-      gl.domElement.removeEventListener('mousemove', handleMouseMove);
+      gl.domElement.removeEventListener('click', requestPointerLock);
+      document.removeEventListener('pointerlockchange', handlePointerLockChange);
+      document.removeEventListener('pointerlockerror', requestPointerLock);
     };
   }, []);
 
