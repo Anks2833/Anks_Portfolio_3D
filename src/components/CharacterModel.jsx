@@ -1,4 +1,4 @@
-import { forwardRef, useEffect, useRef } from "react";
+import React, { forwardRef, useEffect, useRef } from "react";
 import { useGLTF, useAnimations } from '@react-three/drei';
 import * as THREE from 'three';
 
