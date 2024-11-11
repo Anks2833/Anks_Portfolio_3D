@@ -45,17 +45,11 @@ const ThirdPersonCamera = ({ target }) => {
       const targetPosition = new THREE.Vector3();
       target.current.getWorldPosition(targetPosition);
 
-      // Add an offset to the Y position to look at the character's head
-      const headOffset = 1.5; // Adjust this value based on your character's height
-      targetPosition.y += headOffset;
-
       // Calculate desired camera position based on angle and height
-      const desiredPosition = targetPosition.clone().add(
-        new THREE.Vector3(
-          distance * Math.sin(currentAngle) * Math.cos(verticalAngle), // X position
-          verticalOffset + distance * Math.sin(verticalAngle), // Y position (vertical offset)
-          distance * Math.cos(currentAngle) * Math.cos(verticalAngle) // Z position
-        )
+      const desiredPosition = new THREE.Vector3(
+        targetPosition.x + distance * Math.sin(currentAngle) * Math.cos(verticalAngle),
+        targetPosition.y + verticalOffset + distance * Math.sin(verticalAngle),
+        targetPosition.z + distance * Math.cos(currentAngle) * Math.cos(verticalAngle)
       );
 
       // Smooth camera follow with lerp

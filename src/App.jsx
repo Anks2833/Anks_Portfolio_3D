@@ -1,36 +1,27 @@
 import { Canvas } from '@react-three/fiber';
-import { Physics } from '@react-three/cannon'; // Import Physics
 import { useEffect, useState, useRef } from 'react';
-import BackgroundColor from './components/BackgroundColor';
-import CharacterModel from './components/CharacterModel';
-import JungleModel from './components/JungleModel';
 import ThirdPersonCamera from './components/ThirdPersonCamera';
+import CharacterModel from './components/CharacterModel';
+import CharacterController from './components/CharacterController';
+import { Physics } from '@react-three/rapier';
+import CubeSurface from './components/CubeSurface';
 
 const App = () => {
   const [bgColor, setBgColor] = useState('blue');
-  const characterRef = useRef();
-
-  useEffect(() => {
-    const hour = new Date().getHours();
-    if (hour >= 6 && hour < 12) {
-      setBgColor('#48c3e7'); // Morning
-    } else if (hour >= 12 && hour < 18) {
-      setBgColor('#454B56'); // Afternoon
-    } else {
-      setBgColor('#131862'); // Night
-    }
-  }, []);
+  const targetRef = useRef();
 
   return (
     <div className="w-full h-screen">
-      <Canvas style={{ background: bgColor }}>
-        <Physics gravity={[0, -9.81, 0]}>
-          <ambientLight />
-          <pointLight position={[10, 10, 10]} />
-          <CharacterModel ref={characterRef} />
-          <JungleModel />
-          <BackgroundColor color={bgColor} />
-          <ThirdPersonCamera target={characterRef} />
+      <Canvas 
+        style={{ background: "rgb(2 6 23)" }}
+      >
+        <Physics debug>
+          <ambientLight intensity={1} />
+          <directionalLight position={[0, 10, 0]} intensity={2} />
+          <CharacterModel ref={targetRef} />
+          <ThirdPersonCamera target={targetRef} />
+          <CharacterController ref={targetRef} />
+          <CubeSurface />
         </Physics>
       </Canvas>
     </div>
