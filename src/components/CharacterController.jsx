@@ -95,7 +95,7 @@ const CharacterController = () => {
         // Set the new velocity only if it has changed
         body.setLinvel(newVelocity);
       }
-    }, [moving]); // Dependency on moving state, this will run whenever moving changes
+    }, [moving]);
     
   
     // Attach event listeners
@@ -110,8 +110,8 @@ const CharacterController = () => {
     }, []);
   
     return (
-      <RigidBody ref={characterRef} colliders="capsule" position={[0, 1, 0]} gravityScale={0}>
-        <CapsuleCollider args={[4, 1]} position={[0, 0, 0]} />
+      <RigidBody ref={characterRef} colliders={false} position={[0, 1, 0]} gravityScale={0}>
+        <CapsuleCollider args={[3, 2]} position={[0, 0, 0]} />
         <CharacterModel />
       </RigidBody>
     );

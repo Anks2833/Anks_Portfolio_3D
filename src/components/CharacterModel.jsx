@@ -7,15 +7,6 @@ const CharacterModel = forwardRef((props, ref) => {
     const { scene, animations } = useGLTF('../../Models/Bot_Yelling.glb');
     const { actions } = useAnimations(animations, scene);
 
-    // Log animation names
-    // useEffect(() => {
-    //     if (animations) {
-    //         animations.forEach((animation, index) => {
-    //             console.log(Animation ${index}: ${animation.name});
-    //         });
-    //     }
-    // }, [animations]);
-
     // Play the animation
     useEffect(() => {
         if (actions && actions['Armature|mixamo.com|Layer0']) {
@@ -31,7 +22,7 @@ const CharacterModel = forwardRef((props, ref) => {
                 ref={ref}
                 object={scene}
                 scale={[5, 5, 5]}
-                position={[0, 1, 0]}
+                position={[0, -5, 0]}
                 rotation={[0, 0, 0]}
             />
         </>

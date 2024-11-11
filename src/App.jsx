@@ -12,13 +12,12 @@ const App = () => {
 
   return (
     <div className="w-full h-screen">
-      <Canvas 
+      <Canvas
         style={{ background: "rgb(2 6 23)" }}
       >
         <Physics debug>
           <ambientLight intensity={1} />
           <directionalLight position={[0, 10, 0]} intensity={2} />
-          <CharacterModel ref={targetRef} />
           <ThirdPersonCamera target={targetRef} />
           <CharacterController ref={targetRef} />
           <CubeSurface />
