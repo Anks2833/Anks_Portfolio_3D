@@ -23,7 +23,7 @@ const CharacterModel = forwardRef((props, ref) => {
                 object={scene}
                 scale={[5, 5, 5]}
                 position={[0, -5, 0]}
-                rotation={[0, 0, 0]}
+                rotation={[0, 160.2, 0]}
             />
         </>
     );
