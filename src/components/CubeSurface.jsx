@@ -4,7 +4,7 @@ const CubeSurface = () => {
     return (
         <RigidBody type="fixed">
             <mesh>
-                <boxGeometry args={[50, 1, 50]} />
+                <boxGeometry args={[1500, 1, 1500]} />
                 <meshStandardMaterial color="black" />
             </mesh>
         </RigidBody>

@@ -20,7 +20,7 @@ const App = () => {
           <directionalLight position={[0, 10, 0]} intensity={2} />
           <ThirdPersonCamera target={targetRef} />
           <CharacterController ref={targetRef} />
-          <CubeSurface />
+          {/* <CubeSurface /> */}
         </Physics>
       </Canvas>
     </div>
