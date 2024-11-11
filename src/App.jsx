@@ -24,13 +24,12 @@ const App = () => {
   return (
     <div className="w-full h-screen">
       <Canvas style={{ background: bgColor }}>
-        <Physics>
+        <Physics gravity={[0, -9.81, 0]}>
           <ambientLight />
           <pointLight position={[10, 10, 10]} />
           <CharacterModel ref={characterRef} />
           <JungleModel />
           <BackgroundColor color={bgColor} />
-          {/* GTA-style Camera */}
           <ThirdPersonCamera target={characterRef} />
         </Physics>
       </Canvas>
