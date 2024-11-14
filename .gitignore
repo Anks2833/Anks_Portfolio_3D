@@ -1,22 +1,34 @@
 # Logs
 logs
 *.log
+npminstall-debug.log*
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
-
+.vite
 node_modules
+.DS_Store
 dist
 dist-ssr
+dev-dist
+coverage
 *.local
 
+stage.glb
+
+/public/richards_art_gallery_-_audio_tour/
+/public/villa/
+/public/zombie77/
+/public/mond/
+/public/smier/
+/cypress/videos/
+/cypress/screenshots/
+
 # Editor directories and files
-.vscode/*
 !.vscode/extensions.json
 .idea
-.DS_Store
 *.suo
 *.ntvs*
 *.njsproj
