@@ -1,6 +1,6 @@
 <template>
     <div class="babylon">
-        <canvas id="canvas" ref="canvasDom"></canvas>
+        <canvas class="w-full h-full" id="canvas" ref="canvasDom"></canvas>
         <div class="msg_wrap" hidden>
             <div class="msg">
                 <div class="item" v-for="(item, i) in msg.list" :key="i">
